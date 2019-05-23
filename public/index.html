@@ -2,10 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Wiki Wizzard</title>
+  <title>Wiki Wizard | Wikipedia parser</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="author" content="Alex Milde">
-  <meta name="description" content="Wiki Wizzard – transforms wikipedia to structured data.">
+  <meta name="description" content="Wiki Wizard – transforms wikipedia to structured data.">
   <meta name="keywords" content="wikipedia, parser, json, alex milde">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/app.css">
@@ -20,7 +20,7 @@
         <div class="w-full md:w-3/12">
           <div class="sticky top-0">
             <div class="pl-2 pt-4 m-t-1 mb-4 md:mb-16">
-              WIKI <span class="font-light">WIZZARD</span>
+              WIKI <span class="font-light">WIZARD</span>
             </div>
             <ul class="flex md:block">
               <li>
@@ -99,7 +99,7 @@
 
 
           <div v-if="wikidata.length != 0"  class="mx-2 md:mx-8 pt-8 pb-4">
-            <a id="downloadAnchorElem" class="inline-flex items-center uppercase mt-2 py-2 pl-3 pr-4 rounded hover:bg-gray-200 hover:text-blue-wiki-hover transition-03" href="#" v-on:click="downloadJSON()">
+            <a class="js-download-file inline-flex items-center uppercase mt-2 py-2 pl-3 pr-4 rounded hover:bg-gray-200 hover:text-blue-wiki-hover transition-03" href="#" v-on:click="downloadJSON($event)">
               <i class="fill-current flex-initial mr-3 w-6 h-6 ">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                   <path class="heroicon-ui" d="M11 14.59V3a1 1 0 0 1 2 0v11.59l3.3-3.3a1 1 0 0 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 1.4-1.42l3.3 3.3zM3 17a1 1 0 0 1 2 0v3h14v-3a1 1 0 0 1 2 0v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3z"/>
@@ -117,7 +117,7 @@
               </tr>
             </table>
 
-            <a id="downloadAnchorElem" class="inline-flex items-center uppercase mt-2 py-2 pl-3 pr-4 rounded hover:bg-gray-200 hover:text-blue-wiki-hover transition-03" href="#" v-if="currentActivePage" v-on:click="downloadJSON()">
+            <a class="js-download-file inline-flex items-center uppercase mt-2 py-2 pl-3 pr-4 rounded hover:bg-gray-200 hover:text-blue-wiki-hover transition-03" href="#" v-if="currentActivePage" v-on:click="downloadJSON($event)">
               <i class="fill-current flex-initial mr-3 w-6 h-6 ">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                   <path class="heroicon-ui" d="M11 14.59V3a1 1 0 0 1 2 0v11.59l3.3-3.3a1 1 0 0 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 1.4-1.42l3.3 3.3zM3 17a1 1 0 0 1 2 0v3h14v-3a1 1 0 0 1 2 0v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3z"/>

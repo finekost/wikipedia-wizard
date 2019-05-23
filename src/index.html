@@ -1,3 +1,137 @@
-<script src="js/wtf_wikipedia.min.js"></script>
-<script src="js/app.js"></script>
-<h1>Wiki Wizzard</h1>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Wiki Wizard | Wikipedia parser</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="author" content="Alex Milde">
+  <meta name="description" content="Wiki Wizard – transforms wikipedia to structured data.">
+  <meta name="keywords" content="wikipedia, parser, json, alex milde">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/app.css">
+
+  <script src="js/wtf_wikipedia.min.js"></script>
+  <script src="js/vue.js"></script>
+</head>
+<body  class="">
+  <div id="app" class="">
+    <div class="container mx-auto text-sm font-medium">
+      <div class="md:flex">
+        <div class="w-full md:w-3/12">
+          <div class="sticky top-0">
+            <div class="pl-2 pt-4 m-t-1 mb-4 md:mb-16">
+              WIKI <span class="font-light">WIZARD</span>
+            </div>
+            <ul class="flex md:block">
+              <li>
+                <a class="py-1 my-1 px-2 flex-initial md:block hover:bg-gray-200 hover:text-blue-wiki-hover transition-03"
+                href="#" v-on:click="content('about')">About</a>
+              </li>
+              <li>
+                <a class="py-1 my-1 px-2 flex-initial md:block hover:bg-gray-200 hover:text-blue-wiki-hover transition-03"
+                href="#" v-on:click="content('contribute')">Contribute</a>
+              </li>
+              <li>
+                <a class="py-1 my-1 px-2 flex-initial md:block hover:bg-gray-200 hover:text-blue-wiki-hover transition-03"
+                href="#" v-on:click="content('kudos')">Kudos</a>
+              </li>
+
+              <li class="md:flex">
+                <a class="ml-4 md:ml-2 md:mt-3 flex-initial w-5 h-5 md:w-6 md-h-6 hover:text-blue-wiki-hover transition-03 inline-block md:block " href="https://github.com/finekost"><svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>GitHub</title><path d="M10 0a10 10 0 0 0-3.16 19.49c.5.1.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69a3.6 3.6 0 0 1 .1-2.64s.84-.27 2.75 1.02a9.58 9.58 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.4.1 2.64.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85l-.01 2.75c0 .26.18.58.69.48A10 10 0 0 0 10 0"></path></svg>
+                </a>
+                <a class="ml-2 md:ml-4 md:mt-3 flex-initial w-5 h-5 md:w-6 md-h-6 hover:text-blue-wiki-hover transition-03 inline-block md:block " href="https://twitter.com/alexmilde">
+                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Twitter</title><path d="M6.29 18.25c7.55 0 11.67-6.25 11.67-11.67v-.53c.8-.59 1.49-1.3 2.04-2.13-.75.33-1.54.55-2.36.65a4.12 4.12 0 0 0 1.8-2.27c-.8.48-1.68.81-2.6 1a4.1 4.1 0 0 0-7 3.74 11.65 11.65 0 0 1-8.45-4.3 4.1 4.1 0 0 0 1.27 5.49C2.01 8.2 1.37 8.03.8 7.7v.05a4.1 4.1 0 0 0 3.3 4.03 4.1 4.1 0 0 1-1.86.07 4.1 4.1 0 0 0 3.83 2.85A8.23 8.23 0 0 1 0 16.4a11.62 11.62 0 0 0 6.29 1.84"></path></svg>
+                </a>
+              </li>
+            </ul>
+
+            <div class="mt-4 md:mt-10 mb-4 px-2">
+              <input v-model="search"
+              class="py-2 border-b focus:border-gray-800 focus:outline-none w-full appearance-none transition-03"
+              placeholder="Filter"
+              type="search">
+            </div>
+
+            <ul class="text-gray-800 text-sm font-light">
+              <li v-for="parseablePage in parseablePagesFiltered">
+                <a class="pl-2 block my-1 whitespace-no-wrap truncate transition-03 hover:text-blue-wiki-hover" href="#" v-on:click="onParsePage(parseablePage)">{{ parseablePage.page }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="w-full md:w-9/12 overflow-scroll">
+
+          <div class="mx-2 md:mx-8">
+            <div  v-if="currentActivePage=='content-about'" class="w-full md:w-6/12 mt-20 pt-1 content content-about font-light text-sm leading-relaxed">
+              <h1 class="text-2xl font-medium leading-tight">A Wikipedia list to JSON converter</h1>
+              <h2 class="text-2xl mb-8 leading-tight">For anyone in need of some structured data</h2>
+              <p>
+                Wiki wizzard can parse several wikipedia pages and transform the data into json.
+              </p>
+              <p>
+                You need a list of all the US Presidents or all countries with capitals? Wiki wizzard parses the wikipedia page and generates a JSON file for you.
+              </p>
+
+            </div>
+
+            <div v-if="currentActivePage=='content-contribute'" class="w-6/12 mt-20 pt-1 content content-contribute font-light text-sm leading-relaxed">
+              <h1 class="text-2xl font-medium leading-tight">You need a feature?</h1>
+              <h2 class="text-2xl mb-8 leading-tight">I'll do my best to add it.</h2>
+              <p>
+                Whether you added a list, improved the code or just have a suggestion for a feature. You are more than welcome to contribute.
+              </p>
+              <p>
+                As a coder, please use <a href="https://twitter.com/alexmilde" class="border-b border-gray-800 transition-03 hover:text-blue-wiki-hover">github</a>. Otherwise just <a href="https://twitter.com/alexmilde" class="border-b border-gray-800 transition-03 hover:text-blue-wiki-hover">send me a tweet.</a>
+              </p>
+            </div>
+
+            <div v-if="currentActivePage=='content-kudos'" class="w-6/12 mt-20 pt-1 content content-kudos font-light text-sm leading-relaxed">
+              <h1 class="text-2xl font-medium leading-tight">Based on the great work of others.</h1>
+              <h2 class="text-2xl mb-8 leading-tight">This project relies heavily on other peoples work.</h2>
+              <p>
+                My parser transforms the results from <a href="https://github.com/spencermountain/wtf_wikipedia" class="border-b border-gray-800 transition-03 hover:text-blue-wiki-hover">wtf_wikipedia</a> an awesome javascript wikipedia markup parser. By <a href="https://twitter.com/spencermountain" class="border-b border-gray-800 transition-03 hover:text-blue-wiki-hover">Spencer Kelly</a><br><br>
+                The frontend was styled entirely with <a href="https://tailwindcss.com/#what-is-tailwind" class="border-b border-gray-800 transition-03 hover:text-blue-wiki-hover">tailwindcss</a> an utility-first CSS framework. By <a href="https://adamwathan.me/" class="border-b border-gray-800 transition-03 hover:text-blue-wiki-hover">Adam Wathan</a><br><br>
+                I used svg icons from <a href="https://github.com/sschoger/heroicons-ui" class="border-b border-gray-800 transition-03 hover:text-blue-wiki-hover">heroicons-ui</a>. A very useful iconset by <a href="https://www.steveschoger.com/" class="border-b border-gray-800 transition-03 hover:text-blue-wiki-hover">Steve Schoger</a>. He provides some awesome design tips aswell. You should check out his website. <br><br>
+              </p>
+            </div>
+          </div>
+
+
+          <div v-if="wikidata.length != 0"  class="mx-2 md:mx-8 pt-8 pb-4">
+            <a class="js-download-file inline-flex items-center uppercase mt-2 py-2 pl-3 pr-4 rounded hover:bg-gray-200 hover:text-blue-wiki-hover transition-03" href="#" v-on:click="downloadJSON($event)">
+              <i class="fill-current flex-initial mr-3 w-6 h-6 ">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path class="heroicon-ui" d="M11 14.59V3a1 1 0 0 1 2 0v11.59l3.3-3.3a1 1 0 0 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 1.4-1.42l3.3 3.3zM3 17a1 1 0 0 1 2 0v3h14v-3a1 1 0 0 1 2 0v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3z"/>
+                </svg>
+              </i>
+              Json
+            </a>
+
+            <table class="mt-6 w-full text-xs border-b border-gray-800">
+              <tr v-for="(input, index) in wikidata">
+                <th class="text-left mb-2 mt-2 pb-2 border-b border-gray-800 top-0" v-if="index == 0" v-for="(data, key) in input">{{ key }}</th>
+              </tr>
+              <tr v-for="input in wikidata">
+                <td class="py-2" v-for="data in input">{{ data }}</td>
+              </tr>
+            </table>
+
+            <a class="js-download-file inline-flex items-center uppercase mt-2 py-2 pl-3 pr-4 rounded hover:bg-gray-200 hover:text-blue-wiki-hover transition-03" href="#" v-if="currentActivePage" v-on:click="downloadJSON($event)">
+              <i class="fill-current flex-initial mr-3 w-6 h-6 ">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path class="heroicon-ui" d="M11 14.59V3a1 1 0 0 1 2 0v11.59l3.3-3.3a1 1 0 0 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 1.4-1.42l3.3 3.3zM3 17a1 1 0 0 1 2 0v3h14v-3a1 1 0 0 1 2 0v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3z"/>
+                </svg>
+              </i>
+              Json
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="js/app.js"></script>
+</body>
+</html>
