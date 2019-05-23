@@ -1,3 +1,6 @@
+### Wikipedia parser ###
+[https://wikiwizard.finekost.com/](https://wikiwizard.finekost.com/)
+
 ### Installation ###
 - clone repository
 - run npm install
