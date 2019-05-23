@@ -1,5 +1,3 @@
-// 1.add download method to content
-
 function wikiFetch(page, language, app) {
 
   wtf.fetch(page, language, function(err, doc) {
@@ -24,8 +22,6 @@ function wikiFetch(page, language, app) {
       res.push(obj);
     }
     */
-
-
     app.wikidata = rows;
   });
 }
@@ -34,7 +30,8 @@ function wikiFetch(page, language, app) {
 var app = new Vue({
   el: '#app',
   data: {
-    currentActivePage: '',
+    search: '',
+    currentActivePage: 'content-about',
     parseable_pages: [
       {
         lang: 'de',
@@ -52,21 +49,26 @@ var app = new Vue({
     wikidata: []
   },
   methods: {
+    content: function(contentToShow) {
+      this.currentActivePage = 'content-'+contentToShow;
+      this.wikidata = [];
+    },
     onParsePage: function(data) {
-      //Liste von Sportarten -> Liste_von_Sportarten
-      console.log(data.page.replace(/ /g, "_"));
       this.currentActivePage = data.page.replace(/ /g, "_");
       wikiFetch(data.page.replace(/ /g, "_"), data.lang, this);
     },
-    downloadJSON: function() {
-      console.log("download");
-      console.log(this.wikidata);
-
+    downloadJSON: function(event) {
       var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.wikidata, null, 2));
-      var dlAnchorElem = document.getElementById('downloadAnchorElem');
-      dlAnchorElem.setAttribute('href', dataStr);
-      dlAnchorElem.setAttribute('download', this.currentActivePage + '.json');
-      dlAnchorElem.click();
+      var downloadButton = event.target;
+      downloadButton.setAttribute('href', dataStr);
+      downloadButton.setAttribute('download', this.currentActivePage + '.json');
+    }
+  },
+  computed: {
+    parseablePagesFiltered() {
+      return this.parseable_pages.filter(pageInfo => {
+        return pageInfo.page.toLowerCase().includes(this.search.toLowerCase())
+      })
     }
   }
 
