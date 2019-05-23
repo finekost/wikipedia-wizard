@@ -11,6 +11,7 @@
     "sass-loader": "7.*",
     "tailwindcss": "^1.0.1",
     "tailwindcss-transition": "^1.0.5",
+    "vue-template-compiler": "^2.6.10",
     "webpack": "^4.31.0",
     "webpack-cli": "^3.3.2"
   },
