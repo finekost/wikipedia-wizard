@@ -1,3 +1,5 @@
+import { parseable_pages } from './wikiwizard/config';
+
 function wikiFetch(page, language, app) {
 
   wtf.fetch(page, language, function(err, doc) {
@@ -32,20 +34,7 @@ var app = new Vue({
   data: {
     search: '',
     currentActivePage: 'content-about',
-    parseable_pages: [
-      {
-        lang: 'de',
-        page: 'Liste von Sportarten'
-      },
-      {
-        lang: 'de',
-        page: 'Liste der Staaten der Erde'
-      },
-      {
-        lang: 'en',
-        page: 'List of Presidents of the United States'
-      }
-    ],
+    parseable_pages: parseable_pages,
     wikidata: []
   },
   methods: {

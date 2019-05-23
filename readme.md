@@ -9,3 +9,7 @@
 - node
 - laravel mix (webpack wrapper)
 - tailwindcss (utility first css frontend)
+
+### Todos ###
+- custom filter plugin/hook for each page result
+- change config to slug and add real pagename there

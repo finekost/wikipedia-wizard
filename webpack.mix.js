@@ -8,4 +8,5 @@ mix.sass('src/app.scss', 'public/css')
   });
 
 mix.copy('src/index.html', 'public');
-mix.copy('src/js/**', 'public/js');
+mix.copy('src/js/libs/', 'public/js/libs/');
+mix.js('src/js/app.js', 'public/js/app.js');

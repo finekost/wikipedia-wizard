@@ -10,8 +10,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/app.css">
 
-  <script src="js/wtf_wikipedia.min.js"></script>
-  <script src="js/vue.js"></script>
+  <script src="js/libs/wtf_wikipedia.min.js"></script>
+  <script src="js/libs/vue.js"></script>
 </head>
 <body  class="">
   <div id="app" class="">
@@ -62,8 +62,8 @@
 
         <div class="w-full md:w-9/12 overflow-scroll">
 
-          <div class="mx-2 md:mx-8">
-            <div  v-if="currentActivePage=='content-about'" class="w-full md:w-6/12 mt-20 pt-1 content content-about font-light text-sm leading-relaxed">
+          <div class="w-full md:w-6/12 mx-2 md:mx-8">
+            <div  v-if="currentActivePage=='content-about'" class="mt-20 pt-1 content content-about font-light text-sm leading-relaxed">
               <h1 class="text-2xl font-medium leading-tight">A Wikipedia list to JSON converter</h1>
               <h2 class="text-2xl mb-8 leading-tight">For anyone in need of some structured data</h2>
               <p>
@@ -75,7 +75,7 @@
 
             </div>
 
-            <div v-if="currentActivePage=='content-contribute'" class="w-6/12 mt-20 pt-1 content content-contribute font-light text-sm leading-relaxed">
+            <div v-if="currentActivePage=='content-contribute'" class="mt-20 pt-1 content content-contribute font-light text-sm leading-relaxed">
               <h1 class="text-2xl font-medium leading-tight">You need a feature?</h1>
               <h2 class="text-2xl mb-8 leading-tight">I'll do my best to add it.</h2>
               <p>
@@ -86,7 +86,7 @@
               </p>
             </div>
 
-            <div v-if="currentActivePage=='content-kudos'" class="w-6/12 mt-20 pt-1 content content-kudos font-light text-sm leading-relaxed">
+            <div v-if="currentActivePage=='content-kudos'" class="mt-20 pt-1 content content-kudos font-light text-sm leading-relaxed">
               <h1 class="text-2xl font-medium leading-tight">Based on the great work of others.</h1>
               <h2 class="text-2xl mb-8 leading-tight">This project relies heavily on other peoples work.</h2>
               <p>
