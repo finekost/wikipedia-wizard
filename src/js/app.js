@@ -43,8 +43,8 @@ var app = new Vue({
       this.wikidata = [];
     },
     onParsePage: function(data) {
-      this.currentActivePage = data.page.replace(/ /g, "_");
-      wikiFetch(data.page.replace(/ /g, "_"), data.lang, this);
+      this.currentActivePage = data.url_snip;
+      wikiFetch(data.url_snip, data.lang, this);
     },
     downloadJSON: function(event) {
       var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.wikidata, null, 2));
@@ -56,7 +56,7 @@ var app = new Vue({
   computed: {
     parseablePagesFiltered() {
       return this.parseable_pages.filter(pageInfo => {
-        return pageInfo.page.toLowerCase().includes(this.search.toLowerCase())
+        return pageInfo.name.toLowerCase().includes(this.search.toLowerCase())
       })
     }
   }

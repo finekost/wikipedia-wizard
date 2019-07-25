@@ -147,8 +147,8 @@ var app = new Vue({
       this.wikidata = [];
     },
     onParsePage: function onParsePage(data) {
-      this.currentActivePage = data.page.replace(/ /g, "_");
-      wikiFetch(data.page.replace(/ /g, "_"), data.lang, this);
+      this.currentActivePage = data.url_snip;
+      wikiFetch(data.url_snip, data.lang, this);
     },
     downloadJSON: function downloadJSON(event) {
       var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.wikidata, null, 2));
@@ -162,7 +162,7 @@ var app = new Vue({
       var _this = this;
 
       return this.parseable_pages.filter(function (pageInfo) {
-        return pageInfo.page.toLowerCase().includes(_this.search.toLowerCase());
+        return pageInfo.name.toLowerCase().includes(_this.search.toLowerCase());
       });
     }
   }
@@ -182,22 +182,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseable_pages", function() { return parseable_pages; });
 var parseable_pages = [{
   lang: 'de',
-  page: 'Liste von Sportarten'
+  name: 'Liste von Sportarten',
+  url_snip: 'Liste_von_Sportarten'
 }, {
   lang: 'de',
-  page: 'Liste der Staaten der Erde'
+  name: 'Liste der Staaten der Erde',
+  url_snip: 'Liste_der_Staaten_der_Erde'
 }, {
   lang: 'de',
-  page: 'Liste_erfolgreicher_Filme'
+  name: 'Liste erfolgreicher Filme',
+  url_snip: 'Liste_erfolgreicher_Filme'
 }, {
   lang: 'de',
-  page: 'Hamburger_SV'
+  name: 'Hamburger SV',
+  url_snip: 'Hamburger_SV'
 }, {
   lang: 'en',
-  page: 'List of FIFA World Cup winners'
+  name: 'List of FIFA World Cup winners',
+  url_snip: 'List_of_FIFA_World_Cup_winners'
 }, {
   lang: 'en',
-  page: 'List of Presidents of the United States'
+  name: 'List of Presidents of the United States',
+  url_snip: 'List_of_Presidents_of_the_United_States'
 }];
 
 /***/ }),

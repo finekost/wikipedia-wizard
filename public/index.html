@@ -54,7 +54,7 @@
 
             <ul class="text-gray-800 text-sm font-light">
               <li v-for="parseablePage in parseablePagesFiltered">
-                <a class="pl-2 block my-1 whitespace-no-wrap truncate transition-03 hover:text-blue-wiki-hover" href="#" v-on:click="onParsePage(parseablePage)">{{ parseablePage.page }}</a>
+                <a class="pl-2 block my-1 whitespace-no-wrap truncate transition-03 hover:text-blue-wiki-hover" v-bind:href="'#' + parseablePage.url_snip" v-on:click="onParsePage(parseablePage)">{{ parseablePage.name }}</a>
               </li>
             </ul>
           </div>
