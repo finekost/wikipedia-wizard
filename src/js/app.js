@@ -1,30 +1,16 @@
 import { parseable_pages } from './wikiwizard/config';
+import filters from './wikiwizard/filters';
 
 function wikiFetch(page, language, app) {
 
   wtf.fetch(page, language, function(err, doc) {
 
-    let rows = doc.tables(0).keyValue();
-    let keys = Object.keys(rows[0]);
-
-    /*
-    // remove data - in this case for Liste_von_Sportarten
-    var res = [];
-    var removed = ["Bild"];
-
-    for (var r = 0; r < rows.length; r++) {
-      var obj = {};
-      for (var i = 0; i < keys.length; i++) {
-        let key = keys[i];
-        if(!removed.includes(key)) {
-          obj[key] = doc.tables(0).data[r][key].data.text
-        }
-      }
-
-      res.push(obj);
+    if(filters[page] === undefined) {
+      app.wikidata = doc.tables(0).keyValue();
+      return;
     }
-    */
-    app.wikidata = rows;
+
+    app.wikidata = filters[page](doc);
   });
 }
 
@@ -36,6 +22,11 @@ var app = new Vue({
     currentActivePage: 'content-about',
     parseable_pages: parseable_pages,
     wikidata: []
+  },
+  mounted: function()
+  {
+    var hash = window.location.hash.substr(1);
+    this.$refs['#'+hash][0].click();
   },
   methods: {
     content: function(contentToShow) {
