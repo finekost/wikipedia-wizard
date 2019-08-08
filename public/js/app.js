@@ -107,29 +107,18 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wikiwizard_config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./wikiwizard/config */ "./src/js/wikiwizard/config.js");
+/* harmony import */ var _wikiwizard_filters__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./wikiwizard/filters */ "./src/js/wikiwizard/filters.js");
+
 
 
 function wikiFetch(page, language, app) {
   wtf.fetch(page, language, function (err, doc) {
-    var rows = doc.tables(0).keyValue();
-    var keys = Object.keys(rows[0]);
-    /*
-    // remove data - in this case for Liste_von_Sportarten
-    var res = [];
-    var removed = ["Bild"];
-     for (var r = 0; r < rows.length; r++) {
-      var obj = {};
-      for (var i = 0; i < keys.length; i++) {
-        let key = keys[i];
-        if(!removed.includes(key)) {
-          obj[key] = doc.tables(0).data[r][key].data.text
-        }
-      }
-       res.push(obj);
+    if (_wikiwizard_filters__WEBPACK_IMPORTED_MODULE_1__["default"][page] === undefined) {
+      app.wikidata = doc.tables(0).keyValue();
+      return;
     }
-    */
 
-    app.wikidata = rows;
+    app.wikidata = _wikiwizard_filters__WEBPACK_IMPORTED_MODULE_1__["default"][page](doc);
   });
 }
 
@@ -140,6 +129,10 @@ var app = new Vue({
     currentActivePage: 'content-about',
     parseable_pages: _wikiwizard_config__WEBPACK_IMPORTED_MODULE_0__["parseable_pages"],
     wikidata: []
+  },
+  mounted: function mounted() {
+    var hash = window.location.hash.substr(1);
+    this.$refs['#' + hash][0].click();
   },
   methods: {
     content: function content(contentToShow) {
@@ -193,18 +186,148 @@ var parseable_pages = [{
   name: 'Liste erfolgreicher Filme',
   url_snip: 'Liste_erfolgreicher_Filme'
 }, {
-  lang: 'de',
-  name: 'Hamburger SV',
-  url_snip: 'Hamburger_SV'
-}, {
   lang: 'en',
   name: 'List of FIFA World Cup winners',
   url_snip: 'List_of_FIFA_World_Cup_winners'
-}, {
-  lang: 'en',
-  name: 'List of Presidents of the United States',
-  url_snip: 'List_of_Presidents_of_the_United_States'
 }];
+
+/***/ }),
+
+/***/ "./src/js/wikiwizard/filter/de/Liste_der_Staaten_der_Erde.filter.js":
+/*!**************************************************************************!*\
+  !*** ./src/js/wikiwizard/filter/de/Liste_der_Staaten_der_Erde.filter.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../utils */ "./src/js/wikiwizard/filter/utils.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_utils__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (function (rawData) {
+  var rows = Object(_utils__WEBPACK_IMPORTED_MODULE_0__["stripKeys"])(rawData.tables(0), ["2017", "Langform des Staatsnamens", "Fläche", "in km²", "Einw.", "pro km²", "Flag&shy;ge", "TLD", "Englischer Name", "ISO-3-Kürzel", "ISO-2-Kürzel"]);
+  var filteredRows = Object(_utils__WEBPACK_IMPORTED_MODULE_0__["stripRowsWhereKeyHasValue"])(rows, "Staat", ["Erde", "Europäische Union", "Verband Südost&shy;asiatischer Nationen", "Organisation Amerikanischer Staaten", "Afrikanische Union", "Union Südamerikanischer Nationen", "Staat"]);
+  return filteredRows;
+});
+
+/***/ }),
+
+/***/ "./src/js/wikiwizard/filter/de/Liste_erfolgreicher_Filme.filter.js":
+/*!*************************************************************************!*\
+  !*** ./src/js/wikiwizard/filter/de/Liste_erfolgreicher_Filme.filter.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../utils */ "./src/js/wikiwizard/filter/utils.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_utils__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (function (rawData) {
+  return Object(_utils__WEBPACK_IMPORTED_MODULE_0__["stripKeys"])(rawData.tables(0), ["Produktionsland", "Einspiel&shy;ergebnis (nom.)", "Einspiel&shy;ergebnis (infl.-ber.)", "Produktions&shy;kosten", "Kapital&shy;rendite", "Marketing&shy;kosten"]);
+});
+
+/***/ }),
+
+/***/ "./src/js/wikiwizard/filter/de/Liste_von_Sportarten.filter.js":
+/*!********************************************************************!*\
+  !*** ./src/js/wikiwizard/filter/de/Liste_von_Sportarten.filter.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../utils */ "./src/js/wikiwizard/filter/utils.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_utils__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (function (rawData) {
+  return Object(_utils__WEBPACK_IMPORTED_MODULE_0__["stripKeys"])(rawData.tables(0), ["Herkunft/Verbreitung", "Bild", "olympisch", "Typ", "Teamgröße", "Ort der Ausübung"]);
+});
+
+/***/ }),
+
+/***/ "./src/js/wikiwizard/filter/en/List_of_FIFA_World_Cup_winners.filter.js":
+/*!******************************************************************************!*\
+  !*** ./src/js/wikiwizard/filter/en/List_of_FIFA_World_Cup_winners.filter.js ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../utils */ "./src/js/wikiwizard/filter/utils.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_utils__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (function (rawData) {
+  return rawData.tables(0).keyValue();
+});
+
+/***/ }),
+
+/***/ "./src/js/wikiwizard/filter/utils.js":
+/*!*******************************************!*\
+  !*** ./src/js/wikiwizard/filter/utils.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+exports.stripKeys = function (table, remove) {
+  var rows = table.keyValue();
+  var keys = Object.keys(rows[0]);
+  var res = [];
+
+  for (var r = 0; r < rows.length; r++) {
+    var obj = {};
+
+    for (var i = 0; i < keys.length; i++) {
+      var key = keys[i];
+
+      if (!remove.includes(key) && table.data[r][key] !== undefined) {
+        obj[key] = table.data[r][key].data.text;
+      }
+    }
+
+    res.push(obj);
+  }
+
+  return res;
+};
+
+exports.stripRowsWhereKeyHasValue = function (rows, key, remove) {
+  var rowsFiltered = rows.filter(function (value, index, arr) {
+    return !remove.includes(value[key]);
+  });
+  return rowsFiltered;
+};
+
+/***/ }),
+
+/***/ "./src/js/wikiwizard/filters.js":
+/*!**************************************!*\
+  !*** ./src/js/wikiwizard/filters.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _filter_de_Liste_von_Sportarten_filter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./filter/de/Liste_von_Sportarten.filter */ "./src/js/wikiwizard/filter/de/Liste_von_Sportarten.filter.js");
+/* harmony import */ var _filter_de_Liste_der_Staaten_der_Erde_filter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./filter/de/Liste_der_Staaten_der_Erde.filter */ "./src/js/wikiwizard/filter/de/Liste_der_Staaten_der_Erde.filter.js");
+/* harmony import */ var _filter_de_Liste_erfolgreicher_Filme_filter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./filter/de/Liste_erfolgreicher_Filme.filter */ "./src/js/wikiwizard/filter/de/Liste_erfolgreicher_Filme.filter.js");
+/* harmony import */ var _filter_en_List_of_FIFA_World_Cup_winners_filter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./filter/en/List_of_FIFA_World_Cup_winners.filter */ "./src/js/wikiwizard/filter/en/List_of_FIFA_World_Cup_winners.filter.js");
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  'Liste_von_Sportarten': _filter_de_Liste_von_Sportarten_filter__WEBPACK_IMPORTED_MODULE_0__["default"],
+  'Liste_der_Staaten_der_Erde': _filter_de_Liste_der_Staaten_der_Erde_filter__WEBPACK_IMPORTED_MODULE_1__["default"],
+  'Liste_erfolgreicher_Filme': _filter_de_Liste_erfolgreicher_Filme_filter__WEBPACK_IMPORTED_MODULE_2__["default"],
+  'List_of_FIFA_World_Cup_winners': _filter_en_List_of_FIFA_World_Cup_winners_filter__WEBPACK_IMPORTED_MODULE_3__["default"]
+});
 
 /***/ }),
 
