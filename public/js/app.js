@@ -125,7 +125,7 @@ function wikiFetch(page, language, app) {
 var router = new VueRouter({
   mode: 'history',
   routes: [{
-    path: '/content-about',
+    path: '/content/about',
     beforeEnter: function beforeEnter(to, from, next) {
       if (app) {
         app.content(to.path);
@@ -133,7 +133,7 @@ var router = new VueRouter({
       }
     }
   }, {
-    path: '/content-contribute',
+    path: '/content/contribute',
     beforeEnter: function beforeEnter(to, from, next) {
       if (app) {
         app.content(to.path);
@@ -141,7 +141,7 @@ var router = new VueRouter({
       }
     }
   }, {
-    path: '/content-kudos',
+    path: '/content/kudos',
     beforeEnter: function beforeEnter(to, from, next) {
       if (app) {
         app.content(to.path);
@@ -176,9 +176,8 @@ var app = new Vue({
   },
   methods: {
     content: function content(contentToShow) {
-      console.log("content: " + contentToShow);
       this.currentActivePage = contentToShow;
-      this.wikidata = []; //router.push({ path: '/info-'+contentToShow });
+      this.wikidata = [];
     },
     onParsePage: function onParsePage(data) {
       this.currentActivePage = data.url_snip;
