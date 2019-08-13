@@ -12,6 +12,7 @@
 
   <script src="js/libs/wtf_wikipedia.min.js"></script>
   <script src="js/libs/vue.js"></script>
+  <script src="js/libs/vue-router.js"></script>
 </head>
 <body  class="">
   <div id="app" class="">
@@ -24,16 +25,28 @@
             </div>
             <ul class="flex md:block">
               <li>
-                <a class="py-1 my-1 px-2 flex-initial md:block hover:bg-gray-200 hover:text-blue-wiki-hover transition-03"
-                href="#" v-on:click="content('about')">About</a>
+                <!--<a class="py-1 my-1 px-2 flex-initial md:block hover:bg-gray-200 hover:text-blue-wiki-hover transition-03"
+                href="/info-about" v-on:click="content('about')">About</a>-->
+
+                <router-link to="/content-about"
+                  class="py-1 my-1 px-2 flex-initial md:block hover:bg-gray-200 hover:text-blue-wiki-hover transition-03">About</router-link>
               </li>
               <li>
-                <a class="py-1 my-1 px-2 flex-initial md:block hover:bg-gray-200 hover:text-blue-wiki-hover transition-03"
-                href="#" v-on:click="content('contribute')">Contribute</a>
+                <!--<a class="py-1 my-1 px-2 flex-initial md:block hover:bg-gray-200 hover:text-blue-wiki-hover transition-03"
+                href="/info-contribute" v-on:click="content('contribute')">Contribute</a>-->
+                <router-link to="/content-contribute"
+                  class="py-1 my-1 px-2 flex-initial md:block hover:bg-gray-200 hover:text-blue-wiki-hover transition-03">Contribute</router-link>
+
               </li>
               <li>
-                <a class="py-1 my-1 px-2 flex-initial md:block hover:bg-gray-200 hover:text-blue-wiki-hover transition-03"
-                href="#" v-on:click="content('kudos')">Kudos</a>
+                <!--<a class="py-1 my-1 px-2 flex-initial md:block hover:bg-gray-200 hover:text-blue-wiki-hover transition-03"
+                href="/info-kudos" v-on:click="content('kudos')">Kudos</a>-->
+
+
+                <router-link to="/content-kudos"
+                  class="py-1 my-1 px-2 flex-initial md:block hover:bg-gray-200 hover:text-blue-wiki-hover transition-03">Kudos</router-link>
+                <router-link to="/page/Liste_von_Sportarten"
+                  class="py-1 my-1 px-2 flex-initial md:block hover:bg-gray-200 hover:text-blue-wiki-hover transition-03">Kudos</router-link>
               </li>
 
               <li class="md:flex">
@@ -54,7 +67,7 @@
 
             <ul class="text-gray-800 text-sm font-light">
               <li v-for="parseablePage in parseablePagesFiltered">
-                <a class="pl-2 block my-1 whitespace-no-wrap truncate transition-03 hover:text-blue-wiki-hover" v-bind:href="'#' + parseablePage.url_snip" v-on:click="onParsePage(parseablePage)" v-bind:ref="'#' + parseablePage.url_snip">{{ parseablePage.name }}</a>
+                <a class="pl-2 block my-1 whitespace-no-wrap truncate transition-03 hover:text-blue-wiki-hover" v-bind:href="'#' + parseablePage.url_snip" v-on:click="onParsePage(parseablePage)">{{ parseablePage.name }}</a>
               </li>
             </ul>
           </div>
@@ -63,7 +76,7 @@
         <div class="w-full md:w-9/12 overflow-scroll">
 
           <div class="w-full md:w-6/12 mx-2 md:mx-8">
-            <div  v-if="currentActivePage=='content-about'" class="mt-20 pt-1 content content-about font-light text-sm leading-relaxed">
+            <div  v-if="currentActivePage=='/content-about'" class="mt-20 pt-1 content content-about font-light text-sm leading-relaxed">
               <h1 class="text-2xl font-medium leading-tight">A Wikipedia list to JSON converter</h1>
               <h2 class="text-2xl mb-8 leading-tight">For anyone in need of some structured data</h2>
               <p>
@@ -75,7 +88,7 @@
 
             </div>
 
-            <div v-if="currentActivePage=='content-contribute'" class="mt-20 pt-1 content content-contribute font-light text-sm leading-relaxed">
+            <div v-if="currentActivePage=='/content-contribute'" class="mt-20 pt-1 content content-contribute font-light text-sm leading-relaxed">
               <h1 class="text-2xl font-medium leading-tight">You need a feature?</h1>
               <h2 class="text-2xl mb-8 leading-tight">I'll do my best to add it.</h2>
               <p>
@@ -86,7 +99,7 @@
               </p>
             </div>
 
-            <div v-if="currentActivePage=='content-kudos'" class="mt-20 pt-1 content content-kudos font-light text-sm leading-relaxed">
+            <div v-if="currentActivePage=='/content-kudos'" class="mt-20 pt-1 content content-kudos font-light text-sm leading-relaxed">
               <h1 class="text-2xl font-medium leading-tight">Based on the great work of others.</h1>
               <h2 class="text-2xl mb-8 leading-tight">This project relies heavily on other peoples work.</h2>
               <p>

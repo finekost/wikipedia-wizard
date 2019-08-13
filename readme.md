@@ -12,12 +12,16 @@
 
 ### Todos ###
 - link zu original wikipedia seite anzeigen
-- custom filter plugin/hook for each page result
-- change config to slug and add real pagename there
+- vue js router für seo links
+- sandbox für eigenen parser
 - remove rounded corners on mobile search
 
 ### Content ###
-
+- länder mit iso codes
+- primzahlen
+- berufe
+- tiere
+- pflanzen
 
 ### Wiki parser issues
 - Liste_der_Staaten_der_Erde / Vereinigtes Königreich
