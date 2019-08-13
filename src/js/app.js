@@ -15,23 +15,72 @@ function wikiFetch(page, language, app) {
 }
 
 
+const router = new VueRouter({
+  mode: 'history',
+  routes: [
+
+      {
+        path: '/content-about',
+        beforeEnter: (to, from, next) => {
+          if(app) {
+            app.content(to.path);
+            next();
+          }
+        }
+      },
+      {
+        path: '/content-contribute',
+        beforeEnter: (to, from, next) => {
+          if(app) {
+            app.content(to.path);
+            next();
+          }
+        }
+      },
+      {
+        path: '/content-kudos',
+        beforeEnter: (to, from, next) => {
+          if(app) {
+            app.content(to.path);
+            next();
+          }
+        }
+      },
+      {
+        path: '/page/:pageName',
+        beforeEnter: (to, from, next) => {
+          console.log("to");
+          console.log(to);
+          /*
+          if(app) {
+            app.content(to.path);
+            next();
+          }*/
+        }
+      }
+    ]
+})
+
 var app = new Vue({
   el: '#app',
+  router: router,
   data: {
     search: '',
-    currentActivePage: 'content-about',
+    currentActivePage: '/content-about',
     parseable_pages: parseable_pages,
     wikidata: []
   },
-  mounted: function()
-  {
+  mounted: function() {
+
     var hash = window.location.hash.substr(1);
-    this.$refs['#'+hash][0].click();
+    this.content(window.location.pathname);
   },
   methods: {
     content: function(contentToShow) {
-      this.currentActivePage = 'content-'+contentToShow;
+      console.log("content: " + contentToShow);
+      this.currentActivePage = contentToShow;
       this.wikidata = [];
+      //router.push({ path: '/info-'+contentToShow });
     },
     onParsePage: function(data) {
       this.currentActivePage = data.url_snip;
