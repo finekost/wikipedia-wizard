@@ -20,7 +20,7 @@ const router = new VueRouter({
   routes: [
 
       {
-        path: '/content-about',
+        path: '/content/about',
         beforeEnter: (to, from, next) => {
           if(app) {
             app.content(to.path);
@@ -29,7 +29,7 @@ const router = new VueRouter({
         }
       },
       {
-        path: '/content-contribute',
+        path: '/content/contribute',
         beforeEnter: (to, from, next) => {
           if(app) {
             app.content(to.path);
@@ -38,7 +38,7 @@ const router = new VueRouter({
         }
       },
       {
-        path: '/content-kudos',
+        path: '/content/kudos',
         beforeEnter: (to, from, next) => {
           if(app) {
             app.content(to.path);
@@ -77,10 +77,8 @@ var app = new Vue({
   },
   methods: {
     content: function(contentToShow) {
-      console.log("content: " + contentToShow);
       this.currentActivePage = contentToShow;
       this.wikidata = [];
-      //router.push({ path: '/info-'+contentToShow });
     },
     onParsePage: function(data) {
       this.currentActivePage = data.url_snip;
