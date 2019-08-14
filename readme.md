@@ -22,6 +22,9 @@
 - berufe
 - tiere
 - pflanzen
+- bundesländer
+- usa bundesländer
+- ISO-3166-1-Kodierliste
 
 ### Wiki parser issues
 - Liste_der_Staaten_der_Erde / Vereinigtes Königreich
