@@ -11,9 +11,9 @@
 - tailwindcss (utility first css frontend)
 
 ### Todos ###
-- link zu original wikipedia seite anzeigen
-- vue js router für seo links
-- sandbox für eigenen parser
+- link to original wikipedia page
+- add more pages
+- sandbox for own script execution
 - remove rounded corners on mobile search
 
 ### Content ###

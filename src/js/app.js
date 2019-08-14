@@ -11,54 +11,52 @@ function wikiFetch(page, language, app) {
     }
 
     app.wikidata = filters[page](doc);
+    app.wikipedia_loading = false;
   });
+}
+
+const WikiParseResult = {
+  template: '<div></div>',
+  beforeRouteEnter (to, from, next) {
+
+    if(app) {
+      app.content();
+      app.onParsePage(to.params['language'], to.params['wikiPageUrl']);
+      next();
+    }
+  },
+  beforeRouteUpdate (to, from, next) {
+    if(app) {
+      app.content();
+      app.onParsePage(to.params['language'], to.params['wikiPageUrl']);
+      next();
+    }
+  }
+}
+
+const ContentPage = {
+  template: '<div></div>',
+  beforeRouteEnter (to, from, next) {
+    if(app) {
+      app.content(to.path);
+      next();
+    }
+  },
+  beforeRouteUpdate (to, from, next) {
+    if(app) {
+      app.content(to.path);
+      next();
+    }
+  }
+
 }
 
 
 const router = new VueRouter({
   mode: 'history',
   routes: [
-
-      {
-        path: '/content/about',
-        beforeEnter: (to, from, next) => {
-          if(app) {
-            app.content(to.path);
-            next();
-          }
-        }
-      },
-      {
-        path: '/content/contribute',
-        beforeEnter: (to, from, next) => {
-          if(app) {
-            app.content(to.path);
-            next();
-          }
-        }
-      },
-      {
-        path: '/content/kudos',
-        beforeEnter: (to, from, next) => {
-          if(app) {
-            app.content(to.path);
-            next();
-          }
-        }
-      },
-      {
-        path: '/page/:pageName',
-        beforeEnter: (to, from, next) => {
-          console.log("to");
-          console.log(to);
-          /*
-          if(app) {
-            app.content(to.path);
-            next();
-          }*/
-        }
-      }
-    ]
+    { path: '/content/:page', component: ContentPage },
+    { path: '/parse/:language/:wikiPageUrl', component: WikiParseResult }]
 })
 
 var app = new Vue({
@@ -66,23 +64,36 @@ var app = new Vue({
   router: router,
   data: {
     search: '',
-    currentActivePage: '/content-about',
+    currentActivePage: '',
     parseable_pages: parseable_pages,
+    wikipedia_loading: false,
     wikidata: []
   },
   mounted: function() {
+    if(window.location.pathname.length === 1) {
+      this.content('/content/about');
+      return;
+    }
 
-    var hash = window.location.hash.substr(1);
-    this.content(window.location.pathname);
+    if(window.location.pathname.startsWith('/content/')) {
+      this.content(window.location.pathname);
+      return;
+    }
+
+    if(window.location.pathname.startsWith('/parse/')) {
+      var data = window.location.pathname.split('/');
+      this.onParsePage(data[2], data[3]);
+      return;
+    }
   },
   methods: {
     content: function(contentToShow) {
       this.currentActivePage = contentToShow;
       this.wikidata = [];
     },
-    onParsePage: function(data) {
-      this.currentActivePage = data.url_snip;
-      wikiFetch(data.url_snip, data.lang, this);
+    onParsePage: function(lang, url_snip) {
+      this.wikipedia_loading = true;
+      wikiFetch(url_snip, lang, this);
     },
     downloadJSON: function(event) {
       var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.wikidata, null, 2));
