@@ -11,9 +11,9 @@
 - tailwindcss (utility first css frontend)
 
 ### Todos ###
-- link zu original wikipedia seite anzeigen
-- vue js router für seo links
-- sandbox für eigenen parser
+- link to original wikipedia page
+- add more pages
+- sandbox for own script execution
 - remove rounded corners on mobile search
 
 ### Content ###
@@ -22,6 +22,9 @@
 - berufe
 - tiere
 - pflanzen
+- bundesländer
+- usa bundesländer
+- ISO-3166-1-Kodierliste
 
 ### Wiki parser issues
 - Liste_der_Staaten_der_Erde / Vereinigtes Königreich

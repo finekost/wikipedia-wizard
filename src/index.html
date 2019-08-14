@@ -56,7 +56,7 @@
 
             <ul class="text-gray-800 text-sm font-light">
               <li v-for="parseablePage in parseablePagesFiltered">
-                <a class="pl-2 block my-1 whitespace-no-wrap truncate transition-03 hover:text-blue-wiki-hover" v-bind:href="'#' + parseablePage.url_snip" v-on:click="onParsePage(parseablePage)">{{ parseablePage.name }}</a>
+                <router-link class="pl-2 block my-1 whitespace-no-wrap truncate transition-03 hover:text-blue-wiki-hover" v-bind:to="'/parse/' + parseablePage.lang + '/' + parseablePage.url_snip">{{ parseablePage.name }}</router-link>
               </li>
             </ul>
           </div>
@@ -65,6 +65,12 @@
         <div class="w-full md:w-9/12 overflow-scroll">
 
           <div class="w-full md:w-6/12 mx-2 md:mx-8">
+
+            <div  v-if="wikipedia_loading==true" class="mt-20 pt-1 content content-about font-light text-sm leading-relaxed">
+              Loading data.
+            </div>
+            <router-view></router-view>
+
             <div  v-if="currentActivePage=='/content/about'" class="mt-20 pt-1 content content-about font-light text-sm leading-relaxed">
               <h1 class="text-2xl font-medium leading-tight">A Wikipedia list to JSON converter</h1>
               <h2 class="text-2xl mb-8 leading-tight">For anyone in need of some structured data</h2>
@@ -119,7 +125,7 @@
               </tr>
             </table>
 
-            <a class="js-download-file inline-flex items-center uppercase mt-2 py-2 pl-3 pr-4 rounded hover:bg-gray-200 hover:text-blue-wiki-hover transition-03" href="#" v-if="currentActivePage" v-on:click="downloadJSON($event)">
+            <a class="js-download-file inline-flex items-center uppercase mt-2 py-2 pl-3 pr-4 rounded hover:bg-gray-200 hover:text-blue-wiki-hover transition-03" href="#" v-if="wikidata.length != 0" v-on:click="downloadJSON($event)">
               <i class="fill-current flex-initial mr-3 w-6 h-6 ">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                   <path class="heroicon-ui" d="M11 14.59V3a1 1 0 0 1 2 0v11.59l3.3-3.3a1 1 0 0 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 1.4-1.42l3.3 3.3zM3 17a1 1 0 0 1 2 0v3h14v-3a1 1 0 0 1 2 0v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3z"/>
