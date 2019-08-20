@@ -232,21 +232,21 @@ var app = new Vue({
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseable_pages", function() { return parseable_pages; });
 var parseable_pages = [{
-  lang: 'de',
-  name: 'Liste von Sportarten',
-  url_snip: 'Liste_von_Sportarten'
+  'lang': 'de',
+  'name': 'Liste von Sportarten',
+  'url_snip': 'Liste_von_Sportarten'
 }, {
-  lang: 'de',
-  name: 'Liste der Staaten der Erde',
-  url_snip: 'Liste_der_Staaten_der_Erde'
+  'lang': 'de',
+  'name': 'Liste der Staaten der Erde',
+  'url_snip': 'Liste_der_Staaten_der_Erde'
 }, {
-  lang: 'de',
-  name: 'Liste erfolgreicher Filme',
-  url_snip: 'Liste_erfolgreicher_Filme'
+  'lang': 'de',
+  'name': 'Liste erfolgreicher Filme',
+  'url_snip': 'Liste_erfolgreicher_Filme'
 }, {
-  lang: 'en',
-  name: 'List of FIFA World Cup winners',
-  url_snip: 'List_of_FIFA_World_Cup_winners'
+  'lang': 'en',
+  'name': 'List of FIFA World Cup winners',
+  'url_snip': 'List_of_FIFA_World_Cup_winners'
 }];
 
 /***/ }),
