@@ -11,9 +11,9 @@
 - tailwindcss (utility first css frontend)
 
 ### Todos ###
-- link to original wikipedia page
-- add more pages
 - sandbox for own script execution
+- add more pages
+
 - remove rounded corners on mobile search
 
 ### Content ###

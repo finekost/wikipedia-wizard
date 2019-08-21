@@ -1,6 +1,8 @@
 import { parseable_pages } from './wikiwizard/config';
 import filters from './wikiwizard/filters';
 
+import SandboxView from './views/Sandbox';
+
 function wikiFetch(page, language, app) {
 
   wtf.fetch(page, language, function(err, doc) {
@@ -48,13 +50,12 @@ const ContentPage = {
       next();
     }
   }
-
 }
-
 
 const router = new VueRouter({
   mode: 'history',
   routes: [
+    { path: '/sandbox', component: SandboxView },
     { path: '/content/:page', component: ContentPage },
     { path: '/parse/:language/:wikiPageUrl', component: WikiParseResult }]
 })
@@ -67,7 +68,10 @@ var app = new Vue({
     currentActivePage: '',
     parseable_pages: parseable_pages,
     wikipedia_loading: false,
-    wikidata: []
+    wikidata: [],
+    wikidata_sandbox: [],
+    current_page_lang: '',
+    current_page_url_snip: ''
   },
   mounted: function() {
     if(window.location.pathname.length === 1) {
@@ -87,11 +91,13 @@ var app = new Vue({
     }
   },
   methods: {
-    content: function(contentToShow) {
+      content: function(contentToShow) {
       this.currentActivePage = contentToShow;
       this.wikidata = [];
     },
     onParsePage: function(lang, url_snip) {
+      this.current_page_lang = lang;
+      this.current_page_url_snip = url_snip;
       this.wikipedia_loading = true;
       wikiFetch(url_snip, lang, this);
     },
@@ -99,7 +105,7 @@ var app = new Vue({
       var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.wikidata, null, 2));
       var downloadButton = event.target;
       downloadButton.setAttribute('href', dataStr);
-      downloadButton.setAttribute('download', this.currentActivePage + '.json');
+      downloadButton.setAttribute('download', this.current_page_url_snip + '_' + this.current_page_lang + '.json');
     }
   },
   computed: {
@@ -111,3 +117,5 @@ var app = new Vue({
   }
 
 })
+
+window.App = app;
