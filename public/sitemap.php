@@ -1,7 +1,7 @@
 <?php
   error_reporting(E_ALL); ini_set('display_errors', 1);
 
-  $basePath = $_SERVER['HTTP_HOST'] . '/parse/';
+  $basePath = $_SERVER['HTTP_HOST'];
   $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 
   // extract and sanitze json string
@@ -11,6 +11,10 @@
 
   $config = json_decode($jsConfigFileContent);
 
+  echo $protocol . $basePath . '/content/about' . "\n";
+  echo $protocol . $basePath . '/content/contribute' . "\n";
+  echo $protocol . $basePath . '/content/kudos' . "\n";
+
   foreach ($config as $key => $value) {
-    echo $protocol . $basePath . $value->lang . '/' . $value->url_snip . "\n";
+    echo $protocol . $basePath . '/parse/' . $value->lang . '/' . $value->url_snip . "\n";
   }
