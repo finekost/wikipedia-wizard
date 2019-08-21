@@ -123,7 +123,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-var codeString = "\n  // wiki page: https://en.wikipedia.org/wiki/List_of_FIFA_World_Cup_winners\n  wtf.fetch('List_of_FIFA_World_Cup_winners', 'en', function(err, doc) {\n\n    // store result in global variable\n    window.sandboxData = doc.tables(0);\n    console.log(sandboxData);\n\n    // pass data back into app to render table \n    window.App.$data.wikidata_sandbox = doc.tables(0).keyValue();\n  });\n";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var codeString = "\n  // wiki page: https://en.wikipedia.org/wiki/List_of_FIFA_World_Cup_winners\n  wtf.fetch('List_of_FIFA_World_Cup_winners', 'en', function(err, doc) {\n\n    // store result in global variable\n    window.sandboxData = doc.tables(0);\n    console.log(sandboxData);\n\n    // pass data back into app to render table\n    window.App.$data.wikidata_sandbox = doc.tables(0).keyValue();\n  });\n";
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Sandbox',
   data: function data() {
@@ -139,6 +161,9 @@ var codeString = "\n  // wiki page: https://en.wikipedia.org/wiki/List_of_FIFA_W
   methods: {
     evaluate: function evaluate() {
       this.wikidata = eval(this.code);
+    },
+    download: function download(e) {
+      this.$parent.downloadJSON(e);
     }
   }
 });
@@ -191,83 +216,173 @@ var render = function() {
       }
     }),
     _vm._v(" "),
-    _c(
-      "a",
-      {
-        staticClass:
-          "inline-flex items-center uppercase mt-2 py-2 pl-3 pr-4 rounded hover:bg-gray-200 hover:text-blue-wiki-hover transition-03",
-        attrs: { href: "#" },
-        on: {
-          click: function($event) {
-            return _vm.evaluate()
+    _c("div", { staticClass: "flex justify-end" }, [
+      _c(
+        "a",
+        {
+          staticClass:
+            "inline-flex items-center uppercase mt-2 py-2 pl-3 pr-4 rounded hover:bg-gray-200 hover:text-blue-wiki-hover transition-03",
+          attrs: { href: "#" },
+          on: {
+            click: function($event) {
+              return _vm.evaluate()
+            }
           }
-        }
-      },
-      [
-        _c("i", { staticClass: "fill-current flex-initial mr-3 w-6 h-6 " }, [
-          _c(
-            "svg",
-            {
-              attrs: {
-                xmlns: "http://www.w3.org/2000/svg",
-                viewBox: "0 0 24 24",
-                width: "24",
-                height: "24"
-              }
-            },
-            [
-              _c("path", {
-                staticClass: "heroicon-ui",
+        },
+        [
+          _c("i", { staticClass: "fill-current flex-initial mr-3 w-6 h-6 " }, [
+            _c(
+              "svg",
+              {
                 attrs: {
-                  d:
-                    "M6 18.7V21a1 1 0 0 1-2 0v-5a1 1 0 0 1 1-1h5a1 1 0 1 1 0 2H7.1A7 7 0 0 0 19 12a1 1 0 1 1 2 0 9 9 0 0 1-15 6.7zM18 5.3V3a1 1 0 0 1 2 0v5a1 1 0 0 1-1 1h-5a1 1 0 0 1 0-2h2.9A7 7 0 0 0 5 12a1 1 0 1 1-2 0 9 9 0 0 1 15-6.7z"
+                  xmlns: "http://www.w3.org/2000/svg",
+                  viewBox: "0 0 24 24",
+                  width: "24",
+                  height: "24"
                 }
-              })
-            ]
-          )
-        ]),
-        _vm._v("\n    Run\n  ")
-      ]
-    ),
+              },
+              [
+                _c("path", {
+                  staticClass: "heroicon-ui",
+                  attrs: {
+                    d:
+                      "M6 18.7V21a1 1 0 0 1-2 0v-5a1 1 0 0 1 1-1h5a1 1 0 1 1 0 2H7.1A7 7 0 0 0 19 12a1 1 0 1 1 2 0 9 9 0 0 1-15 6.7zM18 5.3V3a1 1 0 0 1 2 0v5a1 1 0 0 1-1 1h-5a1 1 0 0 1 0-2h2.9A7 7 0 0 0 5 12a1 1 0 1 1-2 0 9 9 0 0 1 15-6.7z"
+                  }
+                })
+              ]
+            )
+          ]),
+          _vm._v("\n      Run\n    ")
+        ]
+      )
+    ]),
     _vm._v(" "),
     this.$parent.wikidata_sandbox != 0
-      ? _c(
-          "table",
-          { staticClass: "mt-6 w-full text-xs border-b border-gray-800" },
-          [
-            _vm._l(this.$parent.wikidata_sandbox, function(input, index) {
-              return _c(
-                "tr",
-                _vm._l(input, function(data, key) {
-                  return index == 0
-                    ? _c(
-                        "th",
+      ? _c("div", [
+          this.$parent.wikidata_sandbox != 0
+            ? _c(
+                "a",
+                {
+                  staticClass:
+                    "inline-flex items-center uppercase mt-4 py-2 pl-3 pr-4 rounded hover:bg-gray-200 hover:text-blue-wiki-hover transition-03",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.download($event)
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "i",
+                    { staticClass: "fill-current flex-initial mr-3 w-6 h-6 " },
+                    [
+                      _c(
+                        "svg",
                         {
-                          staticClass:
-                            "text-left mb-2 mt-2 pb-2 border-b border-gray-800 top-0"
+                          attrs: {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            viewBox: "0 0 24 24"
+                          }
                         },
-                        [_vm._v(_vm._s(key))]
+                        [
+                          _c("path", {
+                            staticClass: "heroicon-ui",
+                            attrs: {
+                              d:
+                                "M11 14.59V3a1 1 0 0 1 2 0v11.59l3.3-3.3a1 1 0 0 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 1.4-1.42l3.3 3.3zM3 17a1 1 0 0 1 2 0v3h14v-3a1 1 0 0 1 2 0v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3z"
+                            }
+                          })
+                        ]
                       )
-                    : _vm._e()
-                }),
-                0
+                    ]
+                  ),
+                  _vm._v("\n      Json\n    ")
+                ]
               )
-            }),
-            _vm._v(" "),
-            _vm._l(this.$parent.wikidata_sandbox, function(input) {
-              return _c(
-                "tr",
-                _vm._l(input, function(data) {
-                  return _c("td", { staticClass: "py-2" }, [
-                    _vm._v(_vm._s(data))
-                  ])
-                }),
-                0
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "table",
+            { staticClass: "mt-6 w-full text-xs border-b border-gray-800" },
+            [
+              _vm._l(this.$parent.wikidata_sandbox, function(input, index) {
+                return _c(
+                  "tr",
+                  _vm._l(input, function(data, key) {
+                    return index == 0
+                      ? _c(
+                          "th",
+                          {
+                            staticClass:
+                              "text-left mb-2 mt-2 pb-2 border-b border-gray-800 top-0"
+                          },
+                          [_vm._v(_vm._s(key))]
+                        )
+                      : _vm._e()
+                  }),
+                  0
+                )
+              }),
+              _vm._v(" "),
+              _vm._l(this.$parent.wikidata_sandbox, function(input) {
+                return _c(
+                  "tr",
+                  _vm._l(input, function(data) {
+                    return _c("td", { staticClass: "py-2" }, [
+                      _vm._v(_vm._s(data))
+                    ])
+                  }),
+                  0
+                )
+              })
+            ],
+            2
+          ),
+          _vm._v(" "),
+          this.$parent.wikidata_sandbox != 0
+            ? _c(
+                "a",
+                {
+                  staticClass:
+                    "inline-flex items-center uppercase mt-2 py-2 pl-3 pr-4 rounded hover:bg-gray-200 hover:text-blue-wiki-hover transition-03",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.download($event)
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "i",
+                    { staticClass: "fill-current flex-initial mr-3 w-6 h-6 " },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          attrs: {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            viewBox: "0 0 24 24"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            staticClass: "heroicon-ui",
+                            attrs: {
+                              d:
+                                "M11 14.59V3a1 1 0 0 1 2 0v11.59l3.3-3.3a1 1 0 0 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 1.4-1.42l3.3 3.3zM3 17a1 1 0 0 1 2 0v3h14v-3a1 1 0 0 1 2 0v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3z"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v("\n      Json\n    ")
+                ]
               )
-            })
-          ],
-          2
-        )
+            : _vm._e()
+        ])
       : _vm._e()
   ])
 }
@@ -508,13 +623,22 @@ var app = new Vue({
       this.current_page_lang = lang;
       this.current_page_url_snip = url_snip;
       this.wikipedia_loading = true;
+      this.wikidata_sandbox = [];
       wikiFetch(url_snip, lang, this);
     },
     downloadJSON: function downloadJSON(event) {
-      var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.wikidata, null, 2));
-      var downloadButton = event.target;
+      var downloadData = this.wikidata_sandbox;
+      var fileName = 'Sandboxdata';
+
+      if (downloadData.length === 0) {
+        downloadData = this.wikidata;
+        fileName = this.current_page_url_snip + '_' + this.current_page_lang;
+      }
+
+      var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(downloadData, null, 2));
+      var downloadButton = event.currentTarget;
       downloadButton.setAttribute('href', dataStr);
-      downloadButton.setAttribute('download', this.current_page_url_snip + '_' + this.current_page_lang + '.json');
+      downloadButton.setAttribute('download', fileName + '.json');
     }
   },
   computed: {
@@ -626,6 +750,14 @@ var parseable_pages = [{
   'lang': 'en',
   'name': 'List of FIFA World Cup winners',
   'url_snip': 'List_of_FIFA_World_Cup_winners'
+}, {
+  'lang': 'en',
+  'name': 'List of prime numbers',
+  'url_snip': 'List_of_prime_numbers'
+}, {
+  'lang': 'en',
+  'name': 'List of States of the United States',
+  'url_snip': 'List_of_states_and_territories_of_the_United_States'
 }];
 
 /***/ }),
@@ -704,6 +836,49 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/js/wikiwizard/filter/en/List_of_prime_numbers.filter.js":
+/*!*********************************************************************!*\
+  !*** ./src/js/wikiwizard/filter/en/List_of_prime_numbers.filter.js ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../utils */ "./src/js/wikiwizard/filter/utils.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_utils__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (function (rawData) {
+  return Object(_utils__WEBPACK_IMPORTED_MODULE_0__["stripKeys"])(rawData.tables(0), ["col1"]);
+});
+
+/***/ }),
+
+/***/ "./src/js/wikiwizard/filter/en/List_of_states_and_territories_of_the_United_States.filter.js":
+/*!***************************************************************************************************!*\
+  !*** ./src/js/wikiwizard/filter/en/List_of_states_and_territories_of_the_United_States.filter.js ***!
+  \***************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../utils */ "./src/js/wikiwizard/filter/utils.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_utils__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (function (rawData) {
+  var rows = Object(_utils__WEBPACK_IMPORTED_MODULE_0__["stripKeys"])(rawData.tables(0), ["col3", "col7", "col9", "col12", "total area", "land area", "water area", "number of reps.", "established"]);
+  var filteredRows = Object(_utils__WEBPACK_IMPORTED_MODULE_0__["stripRowsWhereKeyHasValue"])(rows, "name & postal abbreviation", ["Name & postal abbreviation"]);
+  var patchedKeys = Object(_utils__WEBPACK_IMPORTED_MODULE_0__["patchKeys"])(filteredRows, {
+    "name & postal abbreviation": "name",
+    "cities": "postal abbreviation",
+    "population": "established"
+  });
+  return patchedKeys;
+});
+
+/***/ }),
+
 /***/ "./src/js/wikiwizard/filter/utils.js":
 /*!*******************************************!*\
   !*** ./src/js/wikiwizard/filter/utils.js ***!
@@ -724,6 +899,27 @@ exports.stripKeys = function (table, remove) {
 
       if (!remove.includes(key) && table.data[r][key] !== undefined) {
         obj[key] = table.data[r][key].data.text;
+      }
+    }
+
+    res.push(obj);
+  }
+
+  return res;
+};
+
+exports.patchKeys = function (rows, keysToPatch) {
+  var keys = Object.keys(rows[0]);
+  var res = [];
+
+  for (var r = 0; r < rows.length; r++) {
+    var obj = {};
+
+    for (var i = 0; i < keys.length; i++) {
+      var key = keys[i];
+
+      if (key in keysToPatch) {
+        obj[keysToPatch[key]] = rows[r][key];
       }
     }
 
@@ -755,6 +951,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _filter_de_Liste_der_Staaten_der_Erde_filter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./filter/de/Liste_der_Staaten_der_Erde.filter */ "./src/js/wikiwizard/filter/de/Liste_der_Staaten_der_Erde.filter.js");
 /* harmony import */ var _filter_de_Liste_erfolgreicher_Filme_filter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./filter/de/Liste_erfolgreicher_Filme.filter */ "./src/js/wikiwizard/filter/de/Liste_erfolgreicher_Filme.filter.js");
 /* harmony import */ var _filter_en_List_of_FIFA_World_Cup_winners_filter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./filter/en/List_of_FIFA_World_Cup_winners.filter */ "./src/js/wikiwizard/filter/en/List_of_FIFA_World_Cup_winners.filter.js");
+/* harmony import */ var _filter_en_List_of_prime_numbers_filter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./filter/en/List_of_prime_numbers.filter */ "./src/js/wikiwizard/filter/en/List_of_prime_numbers.filter.js");
+/* harmony import */ var _filter_en_List_of_states_and_territories_of_the_United_States_filter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./filter/en/List_of_states_and_territories_of_the_United_States.filter */ "./src/js/wikiwizard/filter/en/List_of_states_and_territories_of_the_United_States.filter.js");
+
+
 
 
 
@@ -763,7 +963,9 @@ __webpack_require__.r(__webpack_exports__);
   'Liste_von_Sportarten': _filter_de_Liste_von_Sportarten_filter__WEBPACK_IMPORTED_MODULE_0__["default"],
   'Liste_der_Staaten_der_Erde': _filter_de_Liste_der_Staaten_der_Erde_filter__WEBPACK_IMPORTED_MODULE_1__["default"],
   'Liste_erfolgreicher_Filme': _filter_de_Liste_erfolgreicher_Filme_filter__WEBPACK_IMPORTED_MODULE_2__["default"],
-  'List_of_FIFA_World_Cup_winners': _filter_en_List_of_FIFA_World_Cup_winners_filter__WEBPACK_IMPORTED_MODULE_3__["default"]
+  'List_of_FIFA_World_Cup_winners': _filter_en_List_of_FIFA_World_Cup_winners_filter__WEBPACK_IMPORTED_MODULE_3__["default"],
+  'List_of_prime_numbers': _filter_en_List_of_prime_numbers_filter__WEBPACK_IMPORTED_MODULE_4__["default"],
+  'List_of_states_and_territories_of_the_United_States': _filter_en_List_of_states_and_territories_of_the_United_States_filter__WEBPACK_IMPORTED_MODULE_5__["default"]
 });
 
 /***/ }),

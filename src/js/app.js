@@ -99,13 +99,22 @@ var app = new Vue({
       this.current_page_lang = lang;
       this.current_page_url_snip = url_snip;
       this.wikipedia_loading = true;
+      this.wikidata_sandbox = [];
       wikiFetch(url_snip, lang, this);
     },
     downloadJSON: function(event) {
-      var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.wikidata, null, 2));
-      var downloadButton = event.target;
+
+      var downloadData = this.wikidata_sandbox;
+      var fileName = 'Sandboxdata';
+      if(downloadData.length === 0) {
+        downloadData = this.wikidata;
+        fileName = this.current_page_url_snip + '_' + this.current_page_lang;
+      }
+
+      var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(downloadData, null, 2));
+      var downloadButton = event.currentTarget;
       downloadButton.setAttribute('href', dataStr);
-      downloadButton.setAttribute('download', this.current_page_url_snip + '_' + this.current_page_lang + '.json');
+      downloadButton.setAttribute('download', fileName + '.json');
     }
   },
   computed: {
