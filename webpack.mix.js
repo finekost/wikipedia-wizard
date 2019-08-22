@@ -9,5 +9,6 @@ mix.sass('src/app.scss', 'public/css')
 
 mix.copy('src/index.html', 'public');
 mix.copy('src/sitemap.php', 'public');
+mix.copy('src/sitemap.txt', 'public');
 mix.copy('src/js/libs/', 'public/js/libs/');
 mix.js('src/js/app.js', 'public/js/app.js');
