@@ -4,7 +4,7 @@
         <div class="w-full md:w-3/12">
           <div class="sticky top-0">
             <div class="pl-2 pt-4 m-t-1 mb-4 md:mb-16">
-              WIKI <span class="font-light">WIZARD</span>
+              WIKI <span class="font-light">WIZARD.</span>
             </div>
             <ul class="flex md:block">
               <li>
