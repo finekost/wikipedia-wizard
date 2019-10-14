@@ -1,28 +1,21 @@
 {
-  "name": "wizzard",
+  "name": "wikiwizard",
   "version": "1.0.0",
-  "description": "",
-  "dependencies": {},
-  "devDependencies": {
-    "cross-env": "^5.2.0",
-    "css-loader": "^2.1.1",
-    "laravel-mix": "^4.0.15",
-    "sass": "^1.20.1",
-    "sass-loader": "7.*",
-    "tailwindcss": "^1.0.1",
-    "tailwindcss-transition": "^1.0.5",
-    "vue-template-compiler": "^2.6.10",
-    "webpack": "^4.31.0",
-    "webpack-cli": "^3.3.2"
-  },
+  "description": "A Wikipedia list to JSON converter",
+  "author": "Alexander Milde",
+  "private": true,
   "scripts": {
-    "dev": "npm run development",
-    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "watch": "npm run development -- --watch",
-    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "prod": "npm run production",
-    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
   },
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "nuxt": "^2.0.0",
+    "tailwindcss-transition": "^1.0.5",
+    "wtf_wikipedia": "^7.7.1"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^1.0.0"
+  }
 }
