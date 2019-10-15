@@ -26,7 +26,7 @@
       <a
         class="inline-flex items-center uppercase mt-4 py-2 pl-3 pr-4 rounded hover:bg-gray-200 hover:text-blue-wiki-hover transition-03"
         href="#"
-        v-if="this.$parent.wikidata_sandbox != 0"
+        v-if="wikidata"
         v-on:click="download($event)"
       >
         <i class="fill-current flex-initial mr-3 w-6 h-6">
@@ -40,7 +40,7 @@
         Json
       </a>
 
-      <table class="mt-6 w-full text-xs border-b border-gray-800">
+      <table v-if="wikidata"  class="mt-6 w-full text-xs border-b border-gray-800">
         <tr v-for="(input, index) in wikidata" v-bind:key="input.id">
           <th
             class="text-left mb-2 mt-2 pb-2 border-b border-gray-800 top-0"
@@ -56,6 +56,7 @@
       <a
         class="inline-flex items-center uppercase mt-2 py-2 pl-3 pr-4 rounded hover:bg-gray-200 hover:text-blue-wiki-hover transition-03"
         href="#"
+        v-if="wikidata"
         v-on:click="download($event)"
       >
         <i class="fill-current flex-initial mr-3 w-6 h-6">
@@ -98,7 +99,7 @@ export default {
   data: function() {
     return {
       code: codeString,
-      wikidata: [1, 2, 3, 4, 5]
+      wikidata: null
     };
   },
   created: function() {
@@ -110,7 +111,6 @@ export default {
       var self = this;
 
       var sandbox_result = eval(this.code).then(function(data) {
-        console.log("prmoise resolved");
         self.wikidata = window.sandboxData;
       });
     },

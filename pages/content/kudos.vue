@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full md:w-6/12 mx-2 md:mx-8">
+  <div class="md:w-6/12 mx-2 md:mx-8">
     <div class="mt-20 pt-1 content font-light text-sm leading-relaxed">
       <h1 class="text-2xl font-medium leading-tight">Based on the great work of others.</h1>
       <h2 class="text-2xl mb-8 leading-tight">This project relies heavily on other peoples work.</h2>
