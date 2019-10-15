@@ -19,6 +19,7 @@
                 class="py-1 my-1 px-2 flex-initial md:block hover:bg-gray-200 hover:text-blue-wiki-hover transition-03"
               >Sandbox</nuxt-link>
             </li>
+            <li>
               <nuxt-link
                 to="/content/contribute"
                 class="py-1 my-1 px-2 flex-initial md:block hover:bg-gray-200 hover:text-blue-wiki-hover transition-03"
@@ -30,10 +31,11 @@
                 class="py-1 my-1 px-2 flex-initial md:block hover:bg-gray-200 hover:text-blue-wiki-hover transition-03"
               >Kudos</nuxt-link>
             </li>
-
+            </ul>
+            <ul class="mt-3">
             <li class="md:flex">
               <a
-                class="ml-4 md:ml-2 md:mt-3 flex-initial w-5 h-5 md:w-6 md-h-6 hover:text-blue-wiki-hover transition-03 inline-block md:block"
+                class="ml-2 md:ml-2 md:mt-3 flex-initial w-5 h-5 md:w-6 md-h-6 hover:text-blue-wiki-hover transition-03 inline-block md:block"
                 href="https://github.com/finekost/wikipedia-wizard"
               >
                 <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

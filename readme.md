@@ -3,13 +3,11 @@
 
 ## Installation ##
 - clone repository
-- run npm install
-- run npm run watch
-- enable mod_rewrite / deeplinks for index.html
+- run yarn
 
 ## Dependencies ##
 - node
-- laravel mix (webpack wrapper)
+- nuxtjs
 - tailwindcss (utility first css frontend)
 
 ## License ##
